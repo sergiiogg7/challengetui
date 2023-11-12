@@ -23,7 +23,7 @@ public class QuoteServiceImpl implements QuoteService {
     private RestTemplate restTemplate;
 
     @Autowired
-    public QuoteServiceImpl( QuoteRepository quoteRepository, RestTemplate restTemplate) {
+    public QuoteServiceImpl(QuoteRepository quoteRepository, RestTemplate restTemplate) {
         this.quoteRepository = quoteRepository;
         this.restTemplate = restTemplate;
     }
