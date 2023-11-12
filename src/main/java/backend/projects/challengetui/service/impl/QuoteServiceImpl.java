@@ -1,6 +1,7 @@
 package backend.projects.challengetui.service.impl;
 
 import backend.projects.challengetui.entity.Quote;
+import backend.projects.challengetui.exception.ResourceNotFoundException;
 import backend.projects.challengetui.interfaces.QuotesApiResponse;
 import backend.projects.challengetui.repository.QuoteRepository;
 import backend.projects.challengetui.service.QuoteService;
@@ -49,7 +50,12 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Override
     public Quote getQuoteById(String id) {
-        return this.quoteRepository.findById(id).get();
+
+        Quote quote = this.quoteRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Quote", "id", id+"")
+        );
+
+        return quote;
     }
 
     @Override
