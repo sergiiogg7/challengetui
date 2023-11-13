@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -18,8 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 public class QuoteServiceTest {
@@ -41,7 +38,8 @@ public class QuoteServiceTest {
     @Test
     public void givenQuoteExists_whenGetQuoteById_thenCorrectQuoteReturned() {
         // Given
-        Quote expectedQuote = new Quote("1", "Test Quote", "Test Author", "Test Genre", 1);
+        String id = "1";
+        Quote expectedQuote = new Quote(id, "Test Quote", "Test Author", "Test Genre", 1);
         when(quoteRepository.findById("1")).thenReturn(Optional.of(expectedQuote));
 
         // When
@@ -49,6 +47,7 @@ public class QuoteServiceTest {
 
         // Then
         assertEquals(expectedQuote, actualQuote);
+        verify(quoteRepository, times(1)).findById("1");
     }
 
     @Test
@@ -63,8 +62,8 @@ public class QuoteServiceTest {
         // When
         List<Quote> actualQuotes = quoteService.getQuotesByAuthor(author);
 
-        // Then
         assertEquals(expectedQuotes, actualQuotes);
+        verify(quoteRepository, times(1)).findByQuoteAuthor(author);
     }
 
     @Test
@@ -80,5 +79,8 @@ public class QuoteServiceTest {
 
         // Then
         assertEquals(expectedQuotes, actualQuotes);
+        verify(quoteRepository, times(1)).findAll();
     }
+
+
 }

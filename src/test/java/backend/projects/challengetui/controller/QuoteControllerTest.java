@@ -1,4 +1,5 @@
-import backend.projects.challengetui.controller.QuoteController;
+package backend.projects.challengetui.controller;
+
 import backend.projects.challengetui.entity.Quote;
 import backend.projects.challengetui.service.QuoteService;
 import org.junit.jupiter.api.BeforeEach;

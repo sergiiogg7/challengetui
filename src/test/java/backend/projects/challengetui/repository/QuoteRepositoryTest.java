@@ -53,8 +53,6 @@ public class QuoteRepositoryTest {
 
     @Test
     public void givenNonexistentId_whenFindById_thenReturnEmptyOptional() {
-        // Given an ID that doesn't exist in the repository
-
         // When
         Optional<Quote> foundQuote = quoteRepository.findById("nonexistentId");
 
@@ -74,7 +72,6 @@ public class QuoteRepositoryTest {
 
         // Then
         assertEquals(2, savedQuotes.size(), "Two quotes should be saved");
-
         assertTrue(savedQuotes.contains(quote1), "Saved quotes should contain Quote 1");
         assertTrue(savedQuotes.contains(quote2), "Saved quotes should contain Quote 2");
     }
